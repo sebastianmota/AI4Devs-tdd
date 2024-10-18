@@ -1,4 +1,157 @@
-# LTI - Sistema de Seguimiento de Talento
+# LTI - Talent Tracking System | ENG
+
+This project is a full-stack application with a React frontend and an Express backend using Prisma as an ORM. The frontend is set up with Create React App, and the backend is written in TypeScript.
+
+## Explanation of Directories and Files
+
+- `backend/`: It contains the server-side code written in Node.js.
+  - `src/`: It contains the source code for the backend.
+    - `index.ts`: The entry point for the backend server.
+    - `application/`: It contains the application logic.
+    - `domain/`: It contains the business logic.
+    - `presentation/`: It contains code related to the presentation layer (such as controllers).
+    - `routes/`: It contains the route definitions for the API.
+  - `prisma/`: It contains the Prisma schema file for ORM.
+  - `tsconfig.json`: TypeScript configuration file.
+- `frontend/`: It contains the client-side code written in React.
+  - `src/`: It contains the source code for the frontend.
+  - `public/`: It contains static files such as the HTML file and images.
+  - `build/`: It contains the production-ready build of the frontend.
+- `.env`: It contains the environment variables.
+- `docker-compose.yml`: It contains the Docker Compose configuration to manage your application's services.
+- `README.md`: This file contains information about the project and instructions on how to run it.
+
+## Project Structure
+
+The project is divided into two main directories: frontend and backend.
+
+### Frontend
+
+The frontend is a React application, and its main files are located in the src folder. The public folder contains static assets, and the build directory contains the production build of the application.
+
+### Backend
+
+The backend is an Express application written in TypeScript. The src directory contains the source code, divided into several subdirectories:
+
+- `application`: It contains the application logic.
+- `domain`: It contains the domain models.
+- `infrastructure`: It contains code related to the infrastructure.
+- `presentation`: It contains code related to the presentation layer.
+- `routes`: It contains the application routes.
+- `tests`: It contains the application tests.
+
+The `prisma` folder contains the Prisma schema.
+
+## First Steps
+
+To get started with this project, follow these steps:
+
+1. Clone the repo.
+2. Install the dependencies for front end and back end:
+```sh
+cd frontend
+npm install
+
+cd ../backend
+npm install
+```
+3. Build the back end server:
+```
+cd backend
+npm run build
+````
+4. Start the backend server:
+```
+cd backend
+npm start
+```
+5. In a new terminal window, build the frontend server:
+```
+cd frontend
+npm run build
+```
+6. Start the frontend server:
+```
+cd frontend
+npm start
+```
+
+The backend server will be running at http://localhost:3010, and the frontend will be available at http://localhost:3000.
+
+## Docker y PostgreSQL
+
+This project uses Docker to run a PostgreSQL database. Here’s how to get it up and running:
+
+Install Docker on your machine if you haven't done so already. You can download it from here.
+Navigate to the root directory of the project in your terminal.
+Run the following command to start the Docker container:
+```
+docker-compose up -d
+```
+This will start a PostgreSQL database in a Docker container. The -d flag runs the container in detached mode, which means it runs in the background.
+
+To access the PostgreSQL database, you can use any PostgreSQL client with the following connection details:
+ - Host: localhost
+ - Port: 5432
+ - User: postgres
+ - Password: password
+ - Database: mydatabase
+
+Please replace User, Password, and Database with the actual username, password, and database name specified in your .env file.
+
+To stop the Docker container, run the following command:
+```
+docker-compose down
+```
+
+To generate the database using Prisma, follow these steps:
+
+1. Make sure that the `.env` file in the root directory of the backend contains the `DATABASE_URL` variable with the correct connection string to your PostgreSQL database. If it doesn’t work, try replacing the full URL directly in `schema.prisma`, in the `url` variable.
+
+2. Open a terminal and navigate to the backend directory where the `schema.prisma` file is located.
+
+3. Run the following command to apply the migrations to your database:
+
+```
+npx prisma migrate dev
+```
+
+Once you have completed all the steps, you should be able to save new candidates, both via the web and via the API, and see them in the database.
+
+```
+POST http://localhost:3010/candidates
+{
+    "firstName": "Albert",
+    "lastName": "Saelices",
+    "email": "albert.saelices@gmail.com",
+    "phone": "656874937",
+    "address": "Calle Sant Dalmir 2, 5ºB. Barcelona",
+    "educations": [
+        {
+            "institution": "UC3M",
+            "title": "Computer Science",
+            "startDate": "2006-12-31",
+            "endDate": "2010-12-26"
+        }
+    ],
+    "workExperiences": [
+        {
+            "company": "Coca Cola",
+            "position": "SWE",
+            "description": "",
+            "startDate": "2011-01-13",
+            "endDate": "2013-01-17"
+        }
+    ],
+    "cv": {
+        "filePath": "uploads/1715760936750-cv.pdf",
+        "fileType": "application/pdf"
+    }
+}
+```
+-------------------------------------------------------------
+
+# LTI - Sistema de Seguimiento de Talento | ES
 
 Este proyecto es una aplicación full-stack con un frontend en React y un backend en Express usando Prisma como un ORM. El frontend se inicia con Create React App y el backend está escrito en TypeScript.
 
@@ -148,4 +301,3 @@ POST http://localhost:3010/candidates
     }
 }
 ```
-
